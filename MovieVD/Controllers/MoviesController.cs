@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MovieVD.Models;
+using MovieVD.ViewModels;
 
 namespace MovieVD.Controllers
 {
@@ -12,17 +13,24 @@ namespace MovieVD.Controllers
         // GET: Movies
         public ActionResult Random()
         {
-            return View();
+            var movie = new Movie() { Name = "Shrek!" };
+
+            var customers = new List<Customer>
+            {
+                new Customer {Name = "Customer 1"},
+                new Customer {Name = "Customer 2"}
+            };
+
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
+           
+            return View(viewModel);
         }
 
-        [Route("movies/released/{year}/{month:regax(\\d{4}):range(1, 12)}")]
-        
-        public ActionResult ByReleasedDate(int year, int month)
-            {
-            return Content(year + "/" + month);
-        }
-                 
-        
+         
 
         
     }
