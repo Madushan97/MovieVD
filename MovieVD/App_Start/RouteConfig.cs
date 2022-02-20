@@ -13,6 +13,20 @@ namespace MovieVD
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+            routes.MapMvcAttributeRoutes();
+
+            /*
+            // custom Route
+            routes.MapRoute(
+                //name
+                "MoviesByReleaseDate",
+                //route
+                "movies/released/{year}/{month}",
+                // Default = anonymous object
+                new { controller = "Movies", action = "ByReleasedDate"},
+                new { year = @"\d{4}", month = @"\d{2}"}
+                );*/
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
