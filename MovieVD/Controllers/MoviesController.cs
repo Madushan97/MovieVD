@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MovieVD.Models;
+using MovieVD.ViewModels;
 
 namespace MovieVD.Controllers
 {
@@ -12,25 +13,25 @@ namespace MovieVD.Controllers
         // GET: Movies
         public ActionResult Random()
         {
-            var movie = new Movie() { Name = "Shrek!"};
-            return View(movie);           
+            var movie = new Movie() { Name = "Shrek!" };
+
+            var customers = new List<Customer>
+            {
+                new Customer {Name = "Customer 1"},
+                new Customer {Name = "Customer 2"}
+            };
+
+            var viewModel = new RandomMovieViewModel
+            {
+                Movie = movie,
+                Customers = customers
+            };
+           
+            return View(viewModel);
         }
 
-        //creating new action
-        public ActionResult Edit(int id)
-        {
-            return Content("id= " + id);
-        }
-        // movies
-        public ActionResult Index(int? pageIndex, string sortBy)
-        {
-            if (!pageIndex.HasValue)
-                pageIndex = 1;
+         
 
-            if (String.IsNullOrWhiteSpace(sortBy))
-                sortBy = "Name";
-
-            return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
-        }
+        
     }
 }
